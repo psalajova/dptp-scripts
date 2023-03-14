@@ -17,21 +17,21 @@
 
 
 # Execute against app.ci (--context=app.ci)
-$ for tag in $( oc get is 4.14 -n ocp -o json | jq -r .status.tags[].tag )
+for tag in $( oc get is 4.14 -n ocp -o json | jq -r .status.tags[].tag )
 do
     oc tag ocp/4.14:$tag ocp/4.15:$tag --as system:admin
 done
 
 
 # Repeat the process for origin namespaces:
-$ for tag in $( oc get is 4.14 -n origin -o json | jq -r .status.tags[].tag )
+for tag in $( oc get is 4.14 -n origin -o json | jq -r .status.tags[].tag )
 do
     oc tag origin/4.14:$tag origin/4.15:$tag --as system:admin
 done
 
 
 # Repeat the process for ocp-private namespace:
-$ for tag in $( oc get is 4.14-priv -n ocp-private -o json | jq -r .status.tags[].tag )
+for tag in $( oc get is 4.14-priv -n ocp-private -o json | jq -r .status.tags[].tag )
 do
     oc tag ocp-private/4.14-priv:$tag ocp-private/4.15-priv:$tag --as system:admin
 done
